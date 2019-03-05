@@ -601,9 +601,10 @@ haControllers.controller('SuspendCtrl', [
 		function($scope, $mdDialog, $mdToast, service) {
 			checkLogin(false);
 			$scope.$emit("load", "dashboard");
+			var oltId;
 
 			refresh = function() {
-				execute($scope, $mdDialog, true, service.statusonu(), {},
+				execute($scope, $mdDialog, true, service.statusonu(oltId), {},
 						function(result) {
 							result = JSON.parse(JSON.stringify(result));
 							var powers = [];
@@ -623,7 +624,7 @@ haControllers.controller('SuspendCtrl', [
 					state = "2";
 				}
 
-				execute($scope, $mdDialog, true, service.changestate(), {
+				execute($scope, $mdDialog, true, service.changestate(oltId), {
 					slot : power.slot,
 					state : state
 				}, function(result) {
@@ -636,7 +637,16 @@ haControllers.controller('SuspendCtrl', [
 				});
 			}
 
-			refresh();
+			execute($scope, $mdDialog, true, service.getOlt(), {}, 
+					function(result){
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+			
+			$scope.oltSelectedEvent = function (_oltId) {
+				oltId = _oltId;
+				refresh();
+			};
 		} ]);
 
 haControllers.controller('RegisterCtrl', [

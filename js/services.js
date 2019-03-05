@@ -42,13 +42,13 @@ haServices
 									return createResource($resource,
 											"/onu/rebootonu", "POST", false);
 								},
-								statusonu : function() {
+								statusonu : function(oltId) {
 									return createResource($resource,
-											"/onu/statusonu", "GET", false);
+											`/onu/statusonu/oltId/${oltId}`, "GET", false);
 								},
-								changestate : function() {
+								changestate : function(oltId) {
 									return createResource($resource,
-											"/onu/changestate", "POST", false);
+											`/onu/changestate/oltId/${oltId}`, "POST", false);
 								},
 								illegalonu : function(oltId) {
 									return createResource($resource,
