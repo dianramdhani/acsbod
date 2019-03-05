@@ -110,7 +110,7 @@ haServices
 					},
 					createDbaProfile: function (oltId) {
 						return createResource($resource,
-							`/onu/dbaProfile/oltId/${oltId}`, "POST", false);
+							`/onu/dbaProfile/olt/${oltId}`, "POST", false);
 					},
 					updateDbaProfile: function (oltId) {
 						return createResource($resource,
@@ -149,7 +149,7 @@ haServices
 					},
 					createServiceProfiles: function (oltId) {
 						return createResource($resource,
-							`/onu/serviceProfiles/oltId/${oltId}`, "POST",
+							`/onu/serviceProfiles/olt/${oltId}`, "POST",
 							false);
 					},
 					deleteServiceProfiles: function (oltId) {
