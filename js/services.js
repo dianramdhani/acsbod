@@ -30,9 +30,9 @@ haServices
 						"$resource",
 						function($resource) {
 							return {
-								opticalpower : function() {
+								opticalpower : function(oltId) {
 									return createResource($resource,
-											"/onu/opticalpower", "GET", false);
+											`/onu/opticalpower/oltId/${oltId}`, "GET", false);
 								},
 								slotonu : function() {
 									return createResource($resource,
@@ -177,6 +177,9 @@ haServices
 								},
 								updateOnt : function() {
 									return createResource($resource, "/onu/saveOnt", "POST", false);
+								},
+								getOlt : function() {
+									return createResource($resource, "/olt", "GET", true);
 								}
 							};
 						} ]);

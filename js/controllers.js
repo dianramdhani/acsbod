@@ -540,7 +540,14 @@ haControllers.controller('MonitorCtrl', [
 			checkLogin(false);
 			$scope.$emit("load", "dashboard");
 
-			execute($scope, $mdDialog, true, service.opticalpower(), {},
+			execute($scope, $mdDialog, true, service.getOlt(), {}, 
+					function(result){
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+			
+			$scope.oltSelectedEvent = function (oltId) {
+				execute($scope, $mdDialog, true, service.opticalpower(oltId), {},
 					function(result) {
 						result = JSON.parse(JSON.stringify(result));
 						var powers = [];
@@ -552,6 +559,7 @@ haControllers.controller('MonitorCtrl', [
 						}
 						$scope.powers = powers;
 					});
+			};
 		} ]);
 
 haControllers.controller('RebootCtrl', [
