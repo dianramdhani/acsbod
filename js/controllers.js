@@ -968,27 +968,27 @@ haControllers
 			function ($scope, $mdDialog, $mdToast, service) {
 				checkLogin(false);
 				$scope.$emit("load", "dashboard");
+				var oltId;
 
 				var maxid = 0;
 				refresh = function () {
-					execute($scope, $mdDialog, true, service
-						.getDbaProfile(), {}, function (result) {
-							$scope.powers = result;
+					execute($scope, $mdDialog, true, service.getDbaProfile(oltId), {}, function (result) {
+						$scope.powers = result;
 
-							maxid = 0;
-							for (i = 0; i < result.length; i++) {
-								var id = parseInt(result[i].id);
-								if (id > maxid) {
-									maxid = id;
-								}
+						maxid = 0;
+						for (i = 0; i < result.length; i++) {
+							var id = parseInt(result[i].id);
+							if (id > maxid) {
+								maxid = id;
 							}
-						});
+						}
+					});
 				}
 
 				save = function (model, isNew) {
-					var serv = service.updateDbaProfile();
+					var serv = service.updateDbaProfile(oltId);
 					if (isNew) {
-						serv = service.createDbaProfile();
+						serv = service.createDbaProfile(oltId);
 					}
 
 					execute(
@@ -1049,15 +1049,24 @@ haControllers
 					$mdDialog.show(confirm).then(
 						function () {
 							execute($scope, $mdDialog, true,
-								service.deleteDbaProfile(),
+								service.deleteDbaProfile(oltId),
 								model, function (result) {
-									showToast($mdToast,
-										'DBA Deleted');
+									showToast($mdToast, 'DBA Deleted');
 									refresh();
 								});
 						});
 				}
-				refresh();
+
+				execute($scope, $mdDialog, true, service.getOlt(), {},
+					function (result) {
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+
+				$scope.oltSelectedEvent = function (_oltId) {
+					oltId = _oltId;
+					refresh();
+				};
 			}]);
 
 haControllers

@@ -104,22 +104,22 @@ haServices
 							"/packageChangesByCustomerId",
 							"GET", true);
 					},
-					getDbaProfile: function () {
+					getDbaProfile: function (oltId) {
 						return createResource($resource,
-							"/onu/dbaProfile", "GET", true);
+							`/onu/dbaProfile/olt/${oltId}`, "GET", true);
 					},
-					createDbaProfile: function () {
+					createDbaProfile: function (oltId) {
 						return createResource($resource,
-							"/onu/dbaProfile", "POST", false);
+							`/onu/dbaProfile/oltId/${oltId}`, "POST", false);
 					},
-					updateDbaProfile: function () {
+					updateDbaProfile: function (oltId) {
 						return createResource($resource,
-							"/onu/updateDbaProfile", "POST",
+							`/onu/updateDbaProfile/oltId/${oltId}`, "POST",
 							false);
 					},
-					deleteDbaProfile: function () {
+					deleteDbaProfile: function (oltId) {
 						return createResource($resource,
-							"/onu/deleteDbaProfile", "POST",
+							`/onu/deleteDbaProfile/oltId/${oltId}`, "POST",
 							false);
 					},
 					getLineProfiles: function (oltId) {
