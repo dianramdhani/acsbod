@@ -147,14 +147,14 @@ haServices
 						return createResource($resource,
 							`/onu/serviceProfiles/olt/${oltId}`, "GET", true);
 					},
-					createServiceProfiles: function () {
+					createServiceProfiles: function (oltId) {
 						return createResource($resource,
-							"/onu/serviceProfiles", "POST",
+							`/onu/serviceProfiles/oltId/${oltId}`, "POST",
 							false);
 					},
-					deleteServiceProfiles: function () {
+					deleteServiceProfiles: function (oltId) {
 						return createResource($resource,
-							"/onu/deleteServiceProfile",
+							`/onu/deleteServiceProfile/oltId/${oltId}`,
 							"POST", false);
 					},
 					changePolicy: function () {

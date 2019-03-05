@@ -1312,6 +1312,7 @@ haControllers.controller('ServiceCtrl', [
 	function ($scope, $mdDialog, $mdToast, service) {
 		checkLogin(false);
 		$scope.$emit("load", "dashboard");
+		var oltId;
 
 		function ascii_to_hexa(str) {
 			var arr1 = [];
@@ -1324,7 +1325,7 @@ haControllers.controller('ServiceCtrl', [
 
 		var maxid = 0;
 		refresh = function () {
-			execute($scope, $mdDialog, true, service.getServiceProfiles(),
+			execute($scope, $mdDialog, true, service.getServiceProfiles(oltId),
 				{}, function (result) {
 					$scope.data = result;
 
@@ -1367,7 +1368,7 @@ haControllers.controller('ServiceCtrl', [
 		}
 
 		save = function (model) {
-			var serv = service.createServiceProfiles();
+			var serv = service.createServiceProfiles(oltId);
 
 			model.name = "hex:" + ascii_to_hexa(model.name);
 			console.log(model.name);
@@ -1380,7 +1381,7 @@ haControllers.controller('ServiceCtrl', [
 
 		update = function (model) {
 			execute($scope, $mdDialog, false, service
-				.deleteServiceProfiles(), {
+				.deleteServiceProfiles(oltId), {
 					id: model.id
 				}, function (result) {
 					setTimeout(function () {
@@ -1448,7 +1449,7 @@ haControllers.controller('ServiceCtrl', [
 			$mdDialog.show(confirm).then(
 				function () {
 					execute($scope, $mdDialog, true, service
-						.deleteServiceProfiles(), {
+						.deleteServiceProfiles(oltId), {
 							id: model.id
 						}, function (result) {
 							showToast($mdToast, 'Service Deleted');
@@ -1456,5 +1457,15 @@ haControllers.controller('ServiceCtrl', [
 						});
 				});
 		}
-		refresh();
+
+		execute($scope, $mdDialog, true, service.getOlt(), {},
+			function (result) {
+				result = JSON.parse(JSON.stringify(result));
+				$scope.olt = result;
+			});
+
+		$scope.oltSelectedEvent = function (_oltId) {
+			oltId = _oltId;
+			refresh();
+		};
 	}]);
