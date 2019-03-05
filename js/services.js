@@ -70,17 +70,17 @@ haServices
 						return createResource($resource,
 							`/onu/policy/oltId/${oltId}`, "GET", true);
 					},
-					savePolicy: function () {
+					savePolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/policy", "POST", false);
+							`/onu/policy/oltId/${oltId}`, "POST", false);
 					},
-					updatePolicy: function () {
+					updatePolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/policyUpdate", "POST", false);
+							`/onu/policyUpdate/oltId/${oltId}`, "POST", false);
 					},
-					deletePolicy: function () {
+					deletePolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/deletePolicy", "POST", false);
+							`/onu/deletePolicy/oltId/${oltId}`, "POST", false);
 					},
 					listAssignedPolicy: function (oltId) {
 						return createResource($resource,

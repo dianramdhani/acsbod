@@ -793,10 +793,11 @@ haControllers.controller('PolicyCtrl', [
 	function ($scope, $mdDialog, $mdToast, service) {
 		checkLogin(false);
 		$scope.$emit("load", "dashboard");
+		var oltId;
 
 		var maxid = 0;
 		refresh = function () {
-			execute($scope, $mdDialog, true, service.getPolicy(), {},
+			execute($scope, $mdDialog, true, service.getPolicy(oltId), {},
 				function (result) {
 					$scope.powers = result;
 
@@ -811,9 +812,9 @@ haControllers.controller('PolicyCtrl', [
 		}
 
 		save = function (model, isNew) {
-			var serv = service.updatePolicy();
+			var serv = service.updatePolicy(oltId);
 			if (isNew) {
-				serv = service.savePolicy();
+				serv = service.savePolicy(oltId);
 			}
 
 			execute($scope, $mdDialog, false, serv, model,
@@ -869,15 +870,23 @@ haControllers.controller('PolicyCtrl', [
 
 			$mdDialog.show(confirm).then(
 				function () {
-					execute($scope, $mdDialog, true, service
-						.deletePolicy(), model, function (result) {
-							showToast($mdToast, 'Policy Deleted');
-							refresh();
-						});
+					execute($scope, $mdDialog, true, service.deletePolicy(oltId), model, function (result) {
+						showToast($mdToast, 'Policy Deleted');
+						refresh();
+					});
 				});
 		}
 
-		refresh();
+		execute($scope, $mdDialog, true, service.getOlt(), {},
+			function (result) {
+				result = JSON.parse(JSON.stringify(result));
+				$scope.olt = result;
+			});
+
+		$scope.oltSelectedEvent = function (_oltId) {
+			oltId = _oltId;
+			refresh();
+		};
 	}]);
 
 haControllers.controller('BandwidthCtrl', [
