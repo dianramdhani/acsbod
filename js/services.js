@@ -87,13 +87,13 @@ haServices
 							`/onu/listAssignedPolicy/oltId/${oltId}`, "GET",
 							true);
 					},
-					egressPolicy: function () {
+					egressPolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/egressPolicy", "POST", false);
+							`/onu/egressPolicy/oltId/${oltId}`, "POST", false);
 					},
-					ingressPolicy: function () {
+					ingressPolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/ingressPolicy", "POST", false);
+							`/onu/ingressPolicy/oltId/${oltId}`, "POST", false);
 					},
 					packageChanges: function () {
 						return createResource($resource,
