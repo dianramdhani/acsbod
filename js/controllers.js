@@ -1080,6 +1080,7 @@ haControllers
 			function ($scope, $mdDialog, $mdToast, service) {
 				checkLogin(false);
 				$scope.$emit("load", "dashboard");
+				var oltId;
 
 				var maxid = 0;
 				refresh = function () {
@@ -1087,7 +1088,7 @@ haControllers
 						$scope,
 						$mdDialog,
 						true,
-						service.getLineProfiles(),
+						service.getLineProfiles(oltId),
 						{},
 						function (result) {
 							$scope.data = result;
@@ -1134,7 +1135,7 @@ haControllers
 				}
 
 				save = function (model) {
-					var serv = service.createLineProfiles();
+					var serv = service.createLineProfiles(oltId);
 
 					var line = {
 						id: model.id,
@@ -1155,17 +1156,13 @@ haControllers
 									lineProfileId: model.id,
 									idDbaProfile: model.tcont[i].dbaProfileId
 								}
-								execute($scope, $mdDialog,
-									false, service
-										.createTcont(),
-									tcont,
-									function (result) {
-										total--;
+								execute($scope, $mdDialog, false, service.createTcont(oltId), tcont, function (result) {
+									total--;
 
-										if (total == 0) {
-											refresh();
-										}
-									});
+									if (total == 0) {
+										refresh();
+									}
+								});
 							}
 
 							for (i = 0; i < model.gem.length; i++) {
@@ -1177,30 +1174,23 @@ haControllers
 									vlan: 'hex:'
 										+ model.gem[i].vlan
 								}
-								execute($scope, $mdDialog,
-									false, service
-										.createGem(),
-									tcont,
-									function (result) {
-										total--;
+								execute($scope, $mdDialog, false, service.createGem(oltId), tcont, function (result) {
+									total--;
 
-										if (total == 0) {
-											refresh();
-										}
-									});
+									if (total == 0) {
+										refresh();
+									}
+								});
 							}
 						});
 				}
 
 				update = function (model) {
-					execute($scope, $mdDialog, false, service
-						.deleteLineProfiles(), {
-							id: model.id
-						}, function (result) {
-							setTimeout(function () {
-								save(model);
-							}, 1000);
-						});
+					execute($scope, $mdDialog, false, service.deleteLineProfiles(oltId), { id: model.id }, function (result) {
+						setTimeout(function () {
+							save(model);
+						}, 1000);
+					});
 				}
 
 				$scope.add = function (event) {
@@ -1295,24 +1285,23 @@ haControllers
 						.show(confirm)
 						.then(
 							function () {
-								execute(
-									$scope,
-									$mdDialog,
-									true,
-									service
-										.deleteLineProfiles(),
-									{
-										id: model.id
-									},
-									function (result) {
-										showToast(
-											$mdToast,
-											'Line Deleted');
-										refresh();
-									});
+								execute($scope, $mdDialog, true, service.deleteLineProfiles(oltId), { id: model.id }, function (result) {
+									showToast($mdToast, 'Line Deleted');
+									refresh();
+								});
 							});
 				}
-				refresh();
+
+				execute($scope, $mdDialog, true, service.getOlt(), {},
+					function (result) {
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+
+				$scope.oltSelectedEvent = function (_oltId) {
+					oltId = _oltId;
+					refresh();
+				};
 			}]);
 
 haControllers.controller('ServiceCtrl', [

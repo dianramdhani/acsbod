@@ -126,22 +126,22 @@ haServices
 						return createResource($resource,
 							`/onu/lineProfiles/olt/${oltId}`, "GET", true);
 					},
-					createLineProfiles: function () {
+					createLineProfiles: function (oltId) {
 						return createResource($resource,
-							"/onu/lineProfiles", "POST", false);
+							`/onu/lineProfiles/oltId/${oltId}`, "POST", false);
 					},
-					deleteLineProfiles: function () {
+					deleteLineProfiles: function (oltId) {
 						return createResource($resource,
-							"/onu/deleteLineProfile", "POST",
+							`/onu/deleteLineProfile/oltId/${oltId}`, "POST",
 							false);
 					},
-					createGem: function () {
+					createGem: function (oltId) {
 						return createResource($resource,
-							"/onu/gem", "POST", false);
+							`/onu/gem/oltId/${oltId}`, "POST", false);
 					},
-					createTcont: function () {
+					createTcont: function (oltId) {
 						return createResource($resource,
-							"/onu/tcont", "POST", false);
+							`/onu/tcont/oltId/${oltId}`, "POST", false);
 					},
 					getServiceProfiles: function (oltId) {
 						return createResource($resource,
