@@ -1,0 +1,32 @@
+<md-dialog aria-label="Policy" style="max-height:85%; min-width:500px">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Riwayat</h2>
+	</div>
+	</md-toolbar>
+	<md-table-container>
+		<table md-table>
+			<thead md-head md-order="order">
+				<tr md-row>
+					<th md-column>Paket</th>
+					<th md-column md-numeric>Waktu Mulai</th>
+					<th md-column md-numeric>Waktu Berhenti</th>
+				</tr>
+			</thead>
+			<tbody md-body>
+				<tr ng-show="model.data == 0">
+				    <td colspan="4" md-row style="padding:24px;text-align:center">
+				        No Data Available.
+				    </td>
+				</tr>
+				<tr md-row ng-repeat="m in model.data">
+					<td md-cell> {{model.packmap[m.changedPolicyId].name}} </td>
+					<td md-cell> {{m.startDate | date :'dd MMMM yyyy HH:mm'}} </td>
+					<td md-cell> {{m.endDate | date :'dd MMMM yyyy HH:mm'}} </td>
+				</tr>
+			</tbody>
+		</table>
+	</md-table-container>
+</form>
+</md-dialog>

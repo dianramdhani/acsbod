@@ -1,0 +1,32 @@
+<md-dialog aria-label="Policy" style="max-height:85%">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Select Devices</h2>
+	</div>
+	</md-toolbar>
+	<md-table-container>
+		<table md-table md-row-select multiple ng-model="model.selected">
+			<thead md-head>
+				<tr md-row>
+					<th md-column>Device</th>
+					<!-- <th md-column>Region</th>
+					<th md-column>Address</th> -->
+				</tr>
+			</thead>
+			<tbody md-body>
+				<tr md-row ng-repeat="x in model.devices"
+					md-select="x" md-select-id="$index" md-auto-select>
+					<td md-cell>{{x.snOnu}}</td>
+					<!-- <td md-cell>{{x.region}}</td>
+					<td md-cell>{{x.address}}</td> -->
+				</tr>
+			</tbody>
+		</table>
+	</md-table-container>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="cancel()">Cancel</md-button>
+		<md-button ng-click="model.save()" ng-disabled="!model.selected.length">Apply</md-button>
+	</md-dialog-actions>
+</form>
+</md-dialog>

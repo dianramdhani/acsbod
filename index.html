@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="REM">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<meta name="author" content="rzefanyaj">
+	<head>
+		<title>ACS & BOD</title>
+		<link rel="icon" type="img/ico" href="favicon.ico">
+		<link rel="stylesheet" href="libs/css/icon.css" />
+		<link rel="stylesheet" href="libs/css/css.css" />
+		<link rel="stylesheet" href="libs/css/angular-material.min.css" />
+		<link rel="stylesheet" href="libs/css/material-datetimepicker.min.css">
+		<link rel="stylesheet" href="libs/css/nv.d3.min.css">
+		<link rel="stylesheet" href="libs/css/md-data-table.min.css">
+		<link rel="stylesheet" href="libs/css/angular-material-sidemenu.css">
+		<link rel="stylesheet" href="css/css.css" />
+	</head>
+	<body ng-app="haApp" ng-controller="MainCtrl" ng-cloak class="demo" layout="row">
+		<div style="position: fixed; z-index: 11; left: 0; right: 0; top: 0" class="md-whiteframe-4dp">
+	        <md-toolbar>
+	            <div class="md-toolbar-tools" style="padding-left: 24px; padding-right: 24px">
+	            		<md-button class="md-icon-button" aria-label="Account" ng-click="toggleLeft()"
+	            			ng-hide="hideMenu">
+	                    <md-icon md-font-set="material-icons">menu</md-icon>
+	                </md-button>
+	                <a ng-href="{{mainlink}}">
+	                    <h5>ACS & BOD</h5>
+	                </a>
+	                <span flex></span>
+	                <md-button class="md-icon-button" ng-click="logout()"
+	            			ng-hide="hideAccount">
+	                    <md-icon md-font-set="material-icons">power_settings_new</md-icon>
+	                </md-button>
+	            </div>
+	        </md-toolbar>
+	        
+			<div id="toastBounds"></div>
+	    </div>
+		<md-sidenav ng-hide="hideMenu == true"
+			class="md-sidenav-left"
+			md-component-id="left"
+			md-is-locked-open="$mdMedia('gt-lg')"
+			md-whiteframe="4">
+			<md-toolbar style="text-align:center; min-height:64px">
+				<h1 class="md-toolbar-tools" style="margin:auto">ACS & BOD</h1>
+			</md-toolbar>
+			<md-divider></md-divider>
+			<md-divider></md-divider>
+			<md-content layout-padding layout="row" style="min-height:56px">
+				<md-button class="md-icon-button" aria-label="Account" ng-click="account($event)" ng-hide="hideAccount == true">
+                    <md-icon md-font-set="material-icons">account_circle</md-icon>
+                    <md-tooltip> Account </md-tooltip>
+                </md-button>
+                <div style="margin:auto 0">
+                		Welcome, <b style="font-weight: 900">{{loggedin}}</b>
+                </div>
+			</md-content>
+			<md-divider></md-divider>
+			<md-divider></md-divider>
+			<md-content>
+				<md-sidemenu>
+					<md-sidemenu-group>
+						<!-- <md-sidemenu-content md-icon="home" onclick="window.location='#!/dashboard'" md-heading="Customer Portal"></md-sidemenu-content> -->
+						<md-sidemenu-content md-icon="supervisor_account" onclick="window.location='#!/clients'" md-heading="Clients"></md-sidemenu-content>
+						<md-sidemenu-content md-icon="work" collapse-other="true" md-heading="Profile" md-arrow="true">
+							<md-sidemenu-button href="#!/policing">Policing Profile</md-sidemenu-button>
+							<md-sidemenu-button href="#!/dba">DBA Profile</md-sidemenu-button>
+							<md-sidemenu-button href="#!/line">Line Profile</md-sidemenu-button>
+							<md-sidemenu-button href="#!/service">Service Profile</md-sidemenu-button>
+						</md-sidemenu-content>
+						<md-sidemenu-content md-icon="settings" collapse-other="true" md-heading="ONU" md-arrow="true">
+							<md-sidemenu-button href="#!/bandwidth">ONU Bandwidth</md-sidemenu-button>
+							<md-sidemenu-button href="#!/register">Register ONU</md-sidemenu-button>
+							<md-sidemenu-button href="#!/unregister">Unregister ONU</md-sidemenu-button>
+							<md-sidemenu-button href="#!/suspend">Enable/Suspend ONU</md-sidemenu-button>
+							<md-sidemenu-button href="#!/reboot">Reboot ONU</md-sidemenu-button>
+							<md-sidemenu-button href="#!/monitor">Monitor ONU Optical Power</md-sidemenu-button>
+						</md-sidemenu-content>
+						<!-- <md-sidemenu-content md-icon="power_settings_new" ng-click="logout()" md-heading="Logout"></md-sidemenu-content>-->
+					</md-sidemenu-group>
+				</md-sidemenu>
+			</md-content>
+		</md-sidenav>
+		<md-content flex layout="column">
+			<div style="height: 64px"></div>
+			<div flex ng-view></div>
+		</md-content>
+		<script src="libs/js/jquery.min.js"></script>
+		<script src="libs/js/angular.min.js"></script>
+		<script src="libs/js/angular-animate.min.js"></script>
+		<script src="libs/js/angular-aria.min.js"></script>
+		<script src="libs/js/angular-messages.min.js"></script>
+		<script src="libs/js/angular-route.min.js"></script>
+		<script src="libs/js/angular-resource.min.js"></script>
+		<script src="libs/js/angular-sanitize.js"></script>
+		<script src="libs/js/angular-material.min.js"></script>
+		<script src="libs/js/d3.min.js"></script>
+		<script src="libs/js/nv.d3.min.js"></script>
+		<script src="libs/js/angular-nvd3.min.js"></script>
+		<script src="libs/js/moment.min.js"></script>
+		<script src="libs/js/angular-material-datetimepicker.min.js"></script>
+		<script src="libs/js/md-data-table.min.js"></script>
+		<script src="libs/js/perfect-scrollbar.jquery.min.js"></script>
+		<script src="libs/js/md5.js"></script>
+		<script src="libs/js/angular-material-sidemenu.js"></script>
+		
+		<script src="js/app.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/services.js"></script>
+	</body>
+</html>
+

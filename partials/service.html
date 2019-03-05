@@ -1,0 +1,47 @@
+<md-content class="md-padding" layout="row">
+	<md-card flex>
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">Service Profile</h2>
+				<div flex></div>
+				<md-button class="md-icon-button" aria-label="Filter"
+					ng-click="add($event)"> 
+					<md-icon class="material-icons">add</md-icon>
+				</md-button>
+			</div>
+		</md-toolbar>
+		<md-table-container>
+			<table md-table class="bordered">
+				<thead md-head>
+					<tr md-row>
+						<th md-column rowspan="2" class="border-top">ID</th>
+						<th md-column rowspan="2" class="border-top">Name</th>
+						<th md-column colspan="2" class="border-top" style="text-align:center">UNI</th>
+						<th md-column rowspan="2" class="border-top" flex="10">Action</th>
+					</tr>
+					<tr md-row>
+						<th md-column class="border-top force-border-left">Mode</th>
+						<th md-column class="border-top">VLAN</th>
+					</tr>	
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="x in powers">
+						<td md-cell rowspan="{{x.height}}"  ng-if="x.id">{{x.id}}</td>
+						<td md-cell rowspan="{{x.height}}"  ng-if="x.id">{{x.name}}</td>
+						<td md-cell class="force-border-left">{{x.unis.mode}}</td>
+						<td md-cell>{{x.unis.vlan}}</td>
+						<td md-cell rowspan="{{x.height}}" ng-if="x.id">
+							<md-button class="md-primary md-raised" 
+								style="margin-right:0px"
+								ng-click="edit(x.index, $event)">Edit</md-button>
+							<md-button class="md-primary md-raised" 
+								style="margin-right:0px"
+								ng-click="remove(x, $event)">Delete</md-button>
+						</td>
+					</tr>
+					
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</md-content>

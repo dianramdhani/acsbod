@@ -1,0 +1,29 @@
+<md-content class="md-padding" layout="row" layout-align="center center" layout-fill>
+	<md-card flex="40">
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">Unregister ONU</h2>
+			</div>
+		</md-toolbar>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column>Serial Name</th>
+						<th md-column md-numeric flex="10">Action</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="x in powers">
+						<td md-cell>{{x.serial}}</td>
+						<td md-cell>
+							<md-button class="md-primary md-raised" 
+								style="margin-right:0px"
+								ng-click="reboot(x)">Unregister</md-button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</md-content>

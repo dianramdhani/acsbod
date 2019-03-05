@@ -1,0 +1,32 @@
+<md-content class="md-padding" layout="row" layout-align="center center" layout-fill>
+	<md-card flex="40">
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">Enable/Suspend ONU</h2>
+			</div>
+		</md-toolbar>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column flex>Slot ONU</th>
+						<th md-column md-numeric flex="10">Status</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="x in powers">
+						<td md-cell>{{x.slot}}</td>
+						<td md-cell layout="row">
+							<div flex>
+  							</div>
+							<md-switch ng-model="x.state" aria-label="Switch"
+								style="margin-right:-8px"
+								ng-change="suspend(x)">	
+							</md-switch>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</md-content>

@@ -1,0 +1,45 @@
+[
+   {
+      id:1,
+      name:"Gedung 1",
+      ac_current:6,
+      ac_total:10,
+      lamp_current:16,
+      lamp_total:20,
+      etc_current:6,
+      etc_total:30,
+      pic:"hotel.jpg",
+      floors:[
+         {
+            id:2,
+            name:"Lantai 2"
+         },
+         {
+            id:1,
+            name:"Lantai 1"
+         }
+      ]
+   },
+   {
+      id:2,
+      name:"Gedung 2",
+      ac_current:7,
+      ac_total:10,
+      lamp_current:20,
+      lamp_total:20,
+      etc_current:9,
+      etc_total:30,
+      pic:"griest.jpg"
+   },
+   {
+      id:3,
+      name:"Gedung 3",
+      ac_current:1,
+      ac_total:10,
+      lamp_current:1,
+      lamp_total:20,
+      etc_current:1,
+      etc_total:30,
+
+   }
+]

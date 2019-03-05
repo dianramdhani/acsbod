@@ -1,0 +1,1 @@
+{"kodePerangkat":"b8:27:eb:2d:03:c0"} 

@@ -1,0 +1,752 @@
+html {
+	background-color: #efefef;
+}
+
+.ha-content {
+	padding-top: 80px;
+}
+
+.ha-room-row {
+	display: flex;
+	flex-flow: row nowrap;
+	margin-top: 10px;
+}
+
+.ha-room-column {
+	display: flex;
+	flex-flow: column nowrap;
+	margin-right: -15px;
+}
+
+.ha-room-lines {
+	height: 0;
+	position: relative;
+	width: 0;
+}
+
+.ha-room-text {
+	color: white;
+	margin-top: 55px;
+	width: 200px;
+}
+
+.ha-room-center-line {
+	background: white none repeat scroll 0 0;
+	height: 145px;
+	left: 21px;
+	position: absolute;
+	width: 4px;
+	z-index: 10;
+}
+
+.ha-room-left-line {
+	background: white none repeat scroll 0 0;
+	height: 145px;
+	position: absolute;
+	width: 2px;
+	z-index: 10;
+}
+
+.ha-room-right-line {
+	background: white none repeat scroll 0 0;
+	height: 145px;
+	left: 45px;
+	position: absolute;
+	width: 2px;
+	z-index: 10;
+}
+
+.ha-room-top-line {
+	background: white none repeat scroll 0 0;
+	height: 4px;
+	margin-bottom: 10px;
+	width: 47px;
+	z-index: 10;
+}
+
+.ha-room-border-left {
+	background: white none repeat scroll 0 0;
+	height: 148px;
+	margin-left: -4px;
+	position: absolute;
+	width: 4px;
+}
+
+.ha-room-border-right {
+	background: white none repeat scroll 0 0;
+	height: 148px;
+	position: absolute;
+	width: 4px;
+}
+
+.ha-room-border-bottom {
+	display: flex;
+	flex-flow: column nowrap;
+	margin-right: 0;
+}
+
+.ha-room-light {
+	height: 40px;
+	margin-left: 3px;
+	margin-right: 3px;
+	width: 40px;
+	z-index: -2;
+}
+
+.ha-room-switch {
+	height: 40px;
+	margin: 12px 1px -12px -1px;
+	transform: rotate(-90deg);
+	width: 62px;
+}
+
+.ha-room-label {
+	color: white;
+	margin-top: 20px;
+	text-align: center;
+	width: 46px;
+}
+
+.ha-hidden {
+	visibility: hidden;
+}
+
+.ha-image {
+	height: 33%;
+	margin: -11px -20px 15px;
+}
+
+.ha-login {
+	background-color: #303030;
+	margin-top: 50px;
+}
+
+.snackbar.snackbar-opened {
+	background-color: #FF5252;
+	transition: transform 0.2s ease-in-out 0s, opacity 0.2s ease-in 0s,
+		height 0s linear 0.2s, height 0s linear 0.2s;
+}
+
+.btn.ha-button-transparent {
+	padding: 0;
+}
+
+@media ( max-width : 768px) {
+	.navbar-right {
+		float: right !important;
+	}
+	.navbar-nav {
+		margin: 0;
+	}
+}
+
+.rem-timeline-container {
+	position: relative;
+}
+
+.rem-timeline-icons {
+	height: 0;
+	position: relative;
+	width: 0;
+}
+
+.rem-timeline-lines {
+	background-color: #757575;
+	height: 500px;
+	margin-left: 23px;
+	position: absolute;
+	width: 4px;
+}
+
+.rem-timeline-circle {
+	background-color: #2196F3;
+	border-radius: 50%;
+	height: 50px;
+	margin-top: 15px;
+	position: absolute;
+	width: 50px;
+}
+
+.rem-timeline-content {
+	margin-left: 70px;
+	padding-top: 15px;
+	text-align: justify;
+}
+
+.rem-timeline-time {
+	text-align: right;
+	width: 100%;
+}
+
+.rem-timeline {
+	min-height: 70px;
+	overflow: hidden;
+}
+
+.rem-timeline-icon {
+	margin-left: 13px;
+	margin-top: 12px;
+	color: #FFFFFF;
+}
+
+.rem-building-image {
+	background: #757575 none repeat scroll center center/cover;
+	border-radius: 2px 2px 0 0;
+	height: 265px;
+	padding-top: 215px;
+}
+
+.rem-building-name-background {
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 5px 15px;
+}
+
+.rem-building-name {
+	color: white;
+	margin-top: 10px;
+}
+
+.rem-building-info {
+	height: 200px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+.rem-building-progress {
+	height: 20px;
+	margin-bottom: 0;
+}
+
+.rem-button-container {
+	position: relative;
+}
+
+.rem-device {
+	display: flex;
+}
+
+.rem-device-value {
+	margin: 10px 0 0 0 !important;
+}
+
+.rem-button {
+	height: 450px;
+	margin-left: 0;
+	margin-top: 0;
+	padding: 0;
+	position: absolute;
+	width: 100%;
+	z-index: 100;
+}
+
+.rem-floor-image {
+	background: #757575 none repeat scroll center center/cover;
+	height: 150px;
+	padding-top: 0px;
+	color: white;
+	padding-left: 0px;
+	border-radius: 2px 0 0 2px;
+	padding-right: 0px
+}
+
+.rem-floor-image .rem-building-name-background {
+	border-radius: 0 0 0 2px;
+}
+
+.rem-floor-name {
+	background-color: rgba(0, 0, 0, 0.5);
+	margin-top: 110px;
+	padding-left: 15px;
+}
+
+.rem-floor-info {
+	padding-top: 15px;
+}
+
+.rem-floor-button {
+	width: 90%;
+	margin-top: 28px;
+	z-index: 150;
+}
+
+.rem-room-button {
+	width: 100%;
+	margin-top: 15px;
+	z-index: 150;
+}
+
+.navbuttons {
+	margin-top: 10px;
+}
+
+.navbuttons>li>a {
+	padding: 0px;
+}
+
+.navbuttons>li>a>button {
+	margin: 0px;
+	width: 100%;
+	padding-left: 20px;
+	text-align: left;
+	text-transform: none;
+	color: #2196F3 !important;
+}
+
+.navbuttons>li>a>button:hover {
+	color: #FFFFFF !important;
+}
+
+.active .slider.noUi-connect, .slider.slider-default.noUi-connect {
+	background-color: #2196F3;
+	z-index: 150;
+}
+
+.slider.noUi-connect, .slider.slider-default.noUi-connect {
+	background-color: #757575;
+}
+
+.noUi-origin[style^="left: 0"] .noUi-handle, .slider .noUi-handle,
+	.slider.slider-default .noUi-handle {
+	background-color: #757575;
+	border: 2px solid #757575;
+}
+
+.active .noUi-origin[style^="left: 0"] .noUi-handle, .active .slider .noUi-handle,
+	.active .slider.slider-default .noUi-handle {
+	background-color: #2196F3;
+	border: 2px solid #2196F3;
+	z-index: 150;
+}
+
+.togglebutton span {
+	text-align: left;
+}
+
+.active.device, .rem-controller.active {
+	color: #2196F3;
+}
+
+.rem-controller {
+	color: #FF5252;
+}
+
+.rem-td-nomargin .form-group {
+	margin: 0;
+	padding: 0;
+}
+
+.rem-td-nomargin .form-group input {
+	margin: 0;
+}
+
+.rem-tree-child-opened {
+	transform: rotate(90deg);
+}
+
+.rem-tree {
+	display: flex;
+}
+
+.rem-tree div {
+	margin-top: 2px;
+}
+
+.rem-level-1 {
+	margin-left: 30px;
+}
+
+.rem-level-2 {
+	margin-left: 60px;
+}
+
+.rem-level-3 {
+	margin-left: 90px;
+}
+
+.table-hover>tbody>tr.rem-tr-level-3:hover>td, .table-hover>tbody>tr.rem-tr-level-3:hover>th
+	{
+	background-color: white;
+	cursor: auto;
+}
+
+.rem-tr-level-3 i {
+	visibility: hidden;
+}
+
+/* Account */
+.rem-photo {
+	height: 150px;
+}
+
+.rem-photo-background {
+	background: #757575 none repeat scroll center center/cover;
+}
+
+.rem-account-fieldset {
+	padding: 0 20px 0 20px;
+}
+
+/* Analyze */
+.rem-analyze-panel {
+	height: 400px;
+}
+
+.rem-form-nomargin {
+	margin-top: 0px;
+}
+
+.form-control.rem-form-period {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 100px;
+}
+
+.form-control.rem-form-date {
+	margin-left: 15px;
+}
+
+.form-control.rem-form-month {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 150px
+}
+
+.form-control.rem-form-year {
+	margin-left: 15px;
+	width: 100px;
+}
+
+.rem-flex {
+	display: flex;
+}
+
+/* Config */
+.rem-building-config {
+	display: flex;
+	padding-bottom: 1px;
+}
+
+.rem-building-form {
+	margin: 0px;
+	margin-right: 5px;
+}
+
+.form-control.rem-config-inputtext {
+	margin: 0px;
+	color: #FFFFFF
+}
+
+.form-control.rem-config-inputtext-normal {
+	margin: 0px;
+}
+
+.rem-whitecolor {
+	color: #FFFFFF;
+}
+
+.rem-greytextcolor, .btn.btn-sm.rem-greytextcolor.active {
+	color: #757575;
+}
+
+.rem-middleicon {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.rem-room-image {
+	height: 200px;
+	padding-top: 149px;
+}
+
+.rem-room-image-smaller {
+	height: 200px;
+	padding-top: 155px;
+}
+
+.rem-panel-config {
+	display: flex;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.rem-panel-devices {
+	padding: 16px 7px 0;
+	padding-top: 0;
+}
+
+.rem-device-button {
+	height: 185px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.rem-device-panel-heading {
+	display: flex;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.rem-device-div {
+	width: 100%;
+	text-align: center;
+}
+
+.rem-device-icon {
+	font-size: 80px;
+	margin-top: 20px !important;
+}
+
+.rem-device-ac-value {
+	margin-bottom: 5px !important;
+	font-family: 'Roboto', 'Helvetica', 'sans-serif';
+}
+
+.rem-device-slider {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.rem-device-add {
+	margin-left: 15px;
+	margin-right: 15px;
+	width: 150px !important;
+}
+
+/* Schedule */
+.btn.btn-default.btn-fab.rem-fab {
+	position: absolute;
+	margin-top: -20px;
+	margin-left: -41px;
+	background-color: #FF5252;
+	color: #FFFFFF;
+	z-index: 150;
+}
+
+.rem-schedule {
+	position: relative;
+	height: 435px;
+}
+
+.table th.rem-schedule-time {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+
+.rem-schedule-devices {
+	position: relative;
+	height: 328px;
+}
+
+.rem-schedule-devices-input {
+	position: relative;
+	height: 217px;
+}
+
+.table th.rem-schedule-input {
+	padding-top: 17px;
+	padding-bottom: 12px;
+}
+
+.rem-schedule-button {
+	margin-top: 10px;
+	margin-bottom: 0;
+}
+
+/* Status */
+.rem-building-status {
+	height: 365px;
+	padding-top: 315px;
+}
+
+.rem-status-floor-panel {
+	padding: 0px;
+	height: 100%;
+}
+
+.rem-status-floor-image {
+	background: #757575 center/cover;
+	height: 100%;
+	display: flex;
+	flex-flow: column-reverse;
+}
+
+/* Dashboard */
+.rem-dashboard-title {
+	padding: 10px 0 0 0;
+}
+
+.rem-dashboard-form {
+	margin: 1px 0 0 0;
+	padding-bottom: 3px;
+}
+
+.rem-dashboard-select {
+	height: inherit;
+	color: #FFFFFF;
+}
+
+.rem-dashboard-select option {
+	color: black;
+	background: white;
+}
+
+/* Generals */
+.rem-nobackground {
+	background: none;
+}
+
+.rem-h500 {
+	height: 500px;
+}
+
+.rem-h450 {
+	height: 450px;
+}
+
+.rem-h430 {
+	height: 430px;
+}
+
+.rem-h390 {
+	height: 390px;
+}
+
+.rem-h240 {
+	height: 240px;
+}
+
+.rem-h185 {
+	height: 185px;
+}
+
+.rem-h150 {
+	height: 150px;
+}
+
+.rem-h80 {
+	height: 80px;
+}
+
+.rem-z100 {
+	z-index: 100;
+}
+
+.rem-z150 {
+	z-index: 150 !important;
+}
+
+.rem-martop100 {
+	margin-top: 100px;
+}
+
+.rem-martop50 {
+	margin-top: 50px;
+}
+
+.rem-martop12 {
+	margin-top: 12px;
+}
+
+.rem-martop10 {
+	margin-top: 10px;
+}
+
+.rem-martop3 {
+	margin-top: 3px;
+}
+
+.rem-martop2 {
+	margin: 2px 0 0 0;
+}
+
+.rem-martop0 {
+	margin-top: 0;
+}
+
+.rem-marbot20 {
+	margin-bottom: 20px;
+}
+
+.rem-marbot0 {
+	margin-bottom: 0;
+}
+
+.rem-margin0, .form-group.rem-margin0, .form-control.rem-margin0, .btn.rem-margin0
+	{
+	margin: 0;
+}
+
+.rem-margin10 {
+	margin: 10px;
+}
+
+.rem-padleft15 {
+	padding-left: 15px !important;
+}
+
+.rem-padtop12, .table th.rem-padtop12 {
+	padding-top: 12px;
+}
+
+.rem-padbot15 {
+	padding-bottom: 15px;
+}
+
+.rem-padding0 {
+	padding: 0;
+}
+
+.rem-table100 {
+	display: table;
+	width: 100%;
+}
+
+.rem-font300 {
+	font-size: 300px;
+}
+
+.rem-font250 {
+	font-size: 250px;
+}
+
+.rem-font200 {
+	font-size: 200px;
+}
+
+.rem-font100 {
+	font-size: 100px;
+}
+
+.rem-hidden {
+	visibility: hidden;
+}
+
+.rem-controller-uid, .rem-controller-status {
+	text-align: center;
+}
+
+.tt-menu {
+	width: 100%;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+}
+
+.tt-suggestion {
+	font-size: 14px;
+	line-height: 48px;
+	margin: 0;
+	overflow: hidden;
+	padding: 8px 15px;
+	text-overflow: ellipsis;
+	transition: background 0.15s linear 0s;
+	white-space: nowrap;
+	background: rgb(255, 255, 255) none repeat scroll 0 0;
+	cursor: pointer;
+}
+
+.tt-suggestion:hover {
+	background: rgb(238, 238, 238) none repeat scroll 0 0;
+}
+
+.twitter-typeahead {
+	width: 100%;
+}

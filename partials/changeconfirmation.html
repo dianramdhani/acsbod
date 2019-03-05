@@ -1,0 +1,23 @@
+<md-dialog aria-label="Policy" style="max-height:85%">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Ubah Paket</h2>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="width:400px;padding:24px">
+		<p>Anda akan mengubah paket menjadi {{model.pack.name}}
+			<ng-container ng-if="model.period == 'temporary'">
+				dari {{model.startdate}} sampai {{model.enddate}}
+			</ng-container>
+		</p>
+		
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button class="md-primary md-raised"  
+			ng-click="cancel()">Batal</md-button>
+		<md-button class="md-primary md-raised"  
+			ng-click="model.update()">Ubah</md-button>
+	</md-dialog-actions>
+</form>
+</md-dialog>

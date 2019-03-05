@@ -1,0 +1,34 @@
+<md-dialog aria-label="Policy" style="max-height:85%">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Register ONU</h2>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="width:400px;padding:24px">
+	<div layout="column">
+			<md-input-container class="md-block" flex> <label>Serial Name</label>
+			<input type="text" name="name" ng-model="model.sn" disabled> </md-input-container>
+		
+		<div layout="row">
+			<md-input-container flex>
+          		<label>Service Profile</label>
+				<md-select ng-model="model.serviceProfileId" flex>
+					<md-option ng-repeat="p in model.serviceProfiles" value="{{p.id}}">{{p.name}}</md-option>
+				</md-select>
+			</md-input-container>
+			
+			<md-input-container flex>
+          		<label>Line Profile</label>
+				<md-select ng-model="model.lineProfileId" flex placeholder="Line profile">
+					<md-option ng-repeat="p in model.lineProfiles" value="{{p.id}}">{{p.name}}</md-option>
+				</md-select>
+			</md-input-container>
+		</div>
+		<div layout="row" flex layout-align="end">
+			<md-button ng-click="model.save()">Save</md-button>
+		</div>
+	</div>
+	</md-dialog-content>
+</form>
+</md-dialog>

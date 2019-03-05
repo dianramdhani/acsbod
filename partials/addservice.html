@@ -1,0 +1,42 @@
+<md-dialog aria-label="Policy" style="max-height:85%">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Service Profile</h2>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="width:400px;padding:24px">
+	<div layout="column">
+		<md-input-container class="md-block noerror" flex> 
+			<label>Name</label>
+			<input type="text" name="name" ng-model="model.name"> 
+		</md-input-container>
+		
+		<div layout="row">
+			UNI
+		</div>
+		<div layout="row" ng-repeat="x in model.unis">
+			<md-button class="md-icon-button md-accent" aria-label="Filter" 
+				ng-click="model.removeUni($index)" style="margin:auto 0"
+				ng-disabled="model.unis.length == 1"> 
+				<md-icon class="material-icons">remove_circle</md-icon>
+			</md-button>
+		
+			<md-input-container class="md-block noerror" flex> 
+				<label>VLAN</label>
+				<input type="text" name="name" ng-model="x.vlan"> 
+			</md-input-container>
+		</div>
+		<div layout="row" style="height:70px">
+			<md-button class="md-icon-button md-accent" aria-label="Filter"
+				ng-click="model.addUni()" style="margin:auto 0"> 
+				<md-icon class="material-icons">add_circle</md-icon>
+			</md-button>
+		</div>
+	</div>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button ng-click="model.save()">Save</md-button>
+	</md-dialog-actions>
+</form>
+</md-dialog>

@@ -1,0 +1,32 @@
+<md-dialog aria-label="Ignore Reason">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Reason</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content" style="margin-top: -20px">
+        <h3>Please give your reason for {{locals.confirmation.title2}}</h3>
+        <form name="reasonForm">
+            <md-input-container class="md-block">
+              <label>Reason *</label>
+              <textarea required name="description" ng-model="locals.confirmation.reason"></textarea>
+              <div ng-messages="reasonForm.description.$error">
+                <div ng-message="required">This is required.</div>
+              </div>
+            </md-input-container>
+         </form>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" style="margin-top: -50px">
+      <md-button ng-disabled="reasonForm.$invalid" ng-click="locals.confirmation.action(); hide();">
+        Submit
+      </md-button>
+      <md-button ng-click="cancel()">
+       Back
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

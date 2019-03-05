@@ -1,0 +1,47 @@
+<md-dialog aria-label="Recollect File Chooser">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{locals.title}}</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <md-table-container>
+            <table md-table ng-class="view" md-row-select ng-model="locals.selected">
+                <thead md-head md-order="locals.order">
+                    <tr md-row>
+                        <th md-column md-order-by="nodeLocation">Node Location</th>
+                        <th md-column md-order-by="fileName">File Name</th>
+                        <th md-column md-order-by="cdrSequence" md-numeric>Sequence</th>
+                    </tr>
+                    <tr md-row style="height:auto" ng-show="reprocessLoading">
+                        <th colspan="3" style="padding:0">
+                            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody md-body>
+                    <tr ng-show="reprocessModel.length == 0">
+                        <td colspan="3" md-row style="padding:24px;text-align:center">
+                            Data not found
+                        </td>
+                    </tr>
+                    <tr md-row class="selectable" md-auto-select md-select="x" md-select-id="fileName" ng-repeat="x in locals.model.recollectFiles | orderBy: locals.order | limitTo:locals.limit : (locals.page - 1) * locals.limit" class="selectable" ng-click="edit(x)">
+                        <td md-cell>{{x.nodeLocation}}</td>
+                        <td md-cell>{{x.fileName}}</td>
+                        <td md-cell md-numeric>{{x.cdrSequence}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </md-table-container>
+        <md-table-pagination md-limit="locals.limit" md-page="locals.page" md-limit-options="[1,5,10,15,50,100]" md-total="{{(locals.model.recollectFiles).length}}" md-page-select>
+        </md-table-pagination>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" >
+      <md-button ng-disabled="locals.selected.length == 0" ng-click="locals.submit()">
+        Submit
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

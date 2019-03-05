@@ -1,0 +1,10 @@
+.panel.pickable {
+	transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1) 0s,
+		background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.2s
+		cubic-bezier(0.4, 0, 0.2, 1) 0s;
+	will-change: box-shadow, transform;
+}
+
+.panel.pickable:active {
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.18), 0 8px 16px rgba(0, 0, 0, 0.36);
+}

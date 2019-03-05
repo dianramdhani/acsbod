@@ -1,0 +1,23 @@
+<md-dialog aria-label="Ignore Reason">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{locals.title}}</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content" style="margin-top: -20px">
+        <h3>{{locals.message}}</h3>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row" style="margin-top: -20px" >
+
+      <span ng-repeat="button in locals.buttons">
+        <md-button ng-click="button.action()">
+         {{button.value}}
+        </md-button>
+      </span>
+    </md-dialog-actions>
+</md-dialog>

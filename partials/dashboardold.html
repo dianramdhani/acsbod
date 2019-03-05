@@ -1,0 +1,145 @@
+<md-content layout="column" layout-align="center center" >
+	<md-toolbar class="md-table-toolbar" style="background-color:rgba(0,0,0,0);color:rgba(0, 0, 0, 0.87)">
+		<div class="md-toolbar-tools">
+			<h2 class="md-title">Customer Portal</h2>	
+		</div>		
+	</md-toolbar>
+	<md-content flex layout="row" style="padding-left:16px; padding-right:16px; margin-top:-8px" layout-padding layout-fill>
+		<md-card style="padding:0" layout-fill>
+			<md-tabs md-dynamic-height md-border-bottom flex>
+				<md-tab label="Profile">
+					<md-content>
+						<md-card flex style="margin:0">
+							<md-card-content md-colors="{background:'red-100'}"
+								ng-show="expireday >= 0 && expirehour >= 0">
+								Your Package will expire in 
+								<b ng-show="expireday">{{expireday}} Day(s)</b> 
+								<b>{{expirehour}} Hour(s)</b>
+							</md-card-content>
+							<md-table-container>
+								<table md-table class="nobordertop">
+									<tbody md-body>
+										<tr md-row>
+											<td md-cell style="width:30%">Serial Number</td>
+											<td md-cell flex>: {{sn}}</td>
+										</tr>
+										<tr md-row>
+											<td md-cell>Ongoing Package</td>
+											<td md-cell>: {{packnow}}</td>
+										</tr>
+										<tr md-row>
+											<td md-cell>Start Date</td>
+											<td md-cell>: {{historynow.startDate | date :'dd MMMM yyyy HH:mm'}}</td>
+										</tr>
+										<tr md-row>
+											<td md-cell>Expiry Date</td>
+											<td md-cell>: {{historynow.endDate | date :'dd MMMM yyyy HH:mm'}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</md-table-container>
+							<md-card-actions>
+								<md-button class="md-primary md-raised" 
+													ng-click="update($event)">Change Package</md-button>
+							</md-card-action>
+						</md-card>
+					</md-content>
+				</md-tab>
+				<md-tab label="History">
+					<md-card flex style="margin:0">
+						<md-card-content layout="row">
+							<div layout="row">
+								<div style="position:relative; margin-right:-184px; visibility:hidden">
+									<md-datepicker 
+										ng-model="weekpicker" md-is-open="weekopen" 
+										ng-change="pickWeek()"
+										md-max-date="startdate.todaypicker">
+									</md-datepicker>
+								</div>
+								<md-button class="md-raised with-arrow" flex
+									ng-click="pickWeek(true)"
+									ng-class="{'md-primary':period=='week'}">
+									{{weekdisplay}}
+								</md-button>
+								<md-button class="md-raised arrow"
+									ng-class="{'md-primary':period=='week'}"
+									ng-click="weekopen = true">
+									<md-icon>arrow_drop_down</md-icon>
+								</md-button>
+							</div>
+							<div layout="row">
+								<div style="position:relative; margin-right:-184px; visibility:hidden">
+									<md-datepicker 
+										ng-model="monthpicker" md-is-open="monthopen" 
+										md-mode="month" ng-change="pickMonth()"
+										md-max-date="startdate.todaypicker">
+									</md-datepicker>
+								</div>
+								<md-button class="md-raised with-arrow" flex
+									ng-click="pickMonth(true)"
+									ng-class="{'md-primary':period=='month'}">
+									{{monthdisplay}}
+								</md-button>
+								<md-button class="md-raised arrow"
+									ng-class="{'md-primary':period=='month'}"
+									ng-click="monthopen = true">
+									<md-icon>arrow_drop_down</md-icon>
+								</md-button>
+							</div>
+							<div layout="row">
+								<md-button class="md-raised with-arrow" 
+									ng-click="pickYear(true)"
+									ng-class="{'md-primary':period=='year'}">
+									{{yeardisplay}}
+								</md-button>
+								<md-menu>
+									<md-button class="md-raised arrow"
+										ng-class="{'md-primary':period=='year'}"
+										ng-click="openMenu($mdMenu, $event)">
+										<md-icon>arrow_drop_down</md-icon>
+									</md-button>
+									<md-menu-content>
+										<md-menu-item ng-repeat="x in yearuntil2018">
+										  <md-button ng-click="pickYear2(x.value)">
+										    {{x.display}}
+										  </md-button>
+										</md-menu-item>
+									</md-menu-content>
+								</md-menu>
+							</div>
+							<span flex></span>
+							<md-button ng-click="download()" class="md-primary md-raised">
+								Download
+							</md-button>
+						</md-card-content>
+						<md-table-container>
+							<table md-table>
+								<thead md-head md-order="filtered.order">
+									<tr md-row>
+										<th md-column>Package</th>
+										<th md-column md-numeric>Start Date</th>
+										<th md-column md-numeric>Expired Date</th>
+									</tr>
+								</thead>
+								<tbody md-body>
+									<tr ng-show="filtered.data.length == 0">
+									    <td colspan="4" md-row style="padding:24px;text-align:center">
+									        No Data Available.
+									    </td>
+									</tr>
+									<tr md-row ng-repeat="m in filtered.data | limitTo: filtered.limit : (filtered.page - 1) * filtered.limit">
+										<td md-cell> {{model.packmap[m.changedPolicyId].name}} </td>
+										<td md-cell> {{m.startDate | date :'dd MMMM yyyy HH:mm'}} </td>
+										<td md-cell> {{m.endDate | date :'dd MMMM yyyy HH:mm'}} </td>
+									</tr>
+								</tbody>
+							</table>
+						</md-table-container>
+						<md-table-pagination md-limit="filtered.limit" md-page="filtered.page"
+							md-total="{{filtered.data.length}}" md-page-select></md-table-pagination>
+					</md-card>
+				</md-tab>
+			</md-tabs>
+		</md-card>
+	</md-content>
+</md-content>

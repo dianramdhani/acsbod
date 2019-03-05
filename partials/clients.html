@@ -1,0 +1,46 @@
+<md-content class="md-padding" layout="row" layout-align="center center" layout-fill>
+	<md-card>
+		<md-toolbar class="md-table-toolbar md-default">
+			<div class="md-toolbar-tools">
+				<h2 class="md-title">Clients</h2>
+			</div>
+		</md-toolbar>
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column>ID</th>
+						<th md-column>Name</th>
+						<th md-column>Start Subscribe</th>
+						<th md-column>Address</th>
+						<!-- <th md-column md-numeric>Slot</th>
+						<th md-column md-numeric>OLT</th>
+						<th md-column md-numeric>ONU</th>
+						<th md-column>SN ONU</th>
+						<th md-column md-numeric>Encrypted SN</th>
+						<th md-column md-numeric>Line Profile ID</th>
+						<th md-column md-numeric>Ingress Policy ID</th>
+						<th md-column md-numeric>Egress Policy ID</th> -->
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="x in powers">
+						<td md-cell>{{x.id}}</td>
+						<td md-cell>{{x.name}}</td>
+						<td md-cell>{{x.startSubscribeDate | date :'dd MMMM yyyy'}}</td>
+						<td md-cell>{{x.address}}</td>	
+						<!-- <td md-cell>{{x.slot}}</td>
+						<td md-cell>{{x.olt}}</td>
+						<td md-cell>{{x.onu}}</td>
+						<td md-cell>{{x.snOnu}}</td>
+						<td md-cell>{{x.encriptedSn}}</td>
+						<td md-cell>{{x.lineProfileId}}</td>
+						<td md-cell>{{x.ingressPolicyId}}</td>
+						<td md-cell>{{x.egressPolicyId}}</td>-->
+					</tr>
+					
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-card>
+</md-content>

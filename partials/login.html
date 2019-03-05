@@ -1,0 +1,29 @@
+<md-card flex-gt-sm="40" flex-offset-gt-sm="30" flex-gt-xs="50"
+	flex-offset-gt-xs="25" flex-xs="100" flex-offset-xs="0"
+	style="margin-top:130px"> <md-card-content layout="column"
+	layout-align="right">
+
+<form name="loginForm">
+	<div ng-show="false"><h2><a href="#!/rahasia">LINK TO RAHASIA</a></h2></div>
+	<div layout="column">
+		<md-input-container class="md-block" style="margin-bottom:0">
+		<label>Username </label> <input type="text" name="username"
+			ng-model="username" required my-enter="login()">
+		<div ng-messages="loginForm.username.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+		</md-input-container>
+		<md-input-container class="md-block"> <label>Password
+		</label> <input type="password" name="password" ng-model="password" required
+			my-enter="login()">
+		<div ng-messages="loginForm.password.$error">
+			<div ng-message="required">This is required.</div>
+		</div>
+		</md-input-container>
+		<div style="width: 100%; text-align: right">
+			<md-button class="md-raised md-primary" ng-click="login()"
+				ng-disabled="loginForm.$invalid">Login</md-button>
+		</div>
+	</div>
+</form>
+</md-card-content></md-card>
