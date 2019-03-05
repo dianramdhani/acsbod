@@ -58,13 +58,13 @@ haServices
 									return createResource($resource,
 											`/onu/register/oltId/${oltId}`, "POST", false);
 								},
-								registeredOnu : function() {
+								registeredOnu : function(oltId) {
 									return createResource($resource,
-											"/onu/registeredOnu", "GET", false);
+											`/onu/registeredOnu/oltId/${oltId}`, "GET", false);
 								},
-								unregister : function() {
+								unregister : function(oltId) {
 									return createResource($resource,
-											"/onu/unregister", "POST", false);
+											`/onu/unregister/oltId/${oltId}`, "POST", false);
 								},
 								getPolicy : function(oltId) {
 									return createResource($resource,

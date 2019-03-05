@@ -727,9 +727,10 @@ haControllers.controller('UnregisterCtrl', [
 		function($scope, $mdDialog, $mdToast, service) {
 			checkLogin(false);
 			$scope.$emit("load", "dashboard");
+			var oltId;
 
 			refresh = function() {
-				execute($scope, $mdDialog, true, service.registeredOnu(), {},
+				execute($scope, $mdDialog, true, service.registeredOnu(oltId), {},
 						function(result) {
 							result = JSON.parse(JSON.stringify(result));
 							var powers = [];
@@ -743,7 +744,7 @@ haControllers.controller('UnregisterCtrl', [
 			}
 
 			$scope.reboot = function(power) {
-				execute($scope, $mdDialog, true, service.unregister(), {
+				execute($scope, $mdDialog, true, service.unregister(oltId), {
 					sn : power.serial
 				}, function(result) {
 					showToast($mdToast, 'ONU Unregistered');
@@ -751,7 +752,16 @@ haControllers.controller('UnregisterCtrl', [
 				});
 			}
 
-			refresh();
+			execute($scope, $mdDialog, true, service.getOlt(), {}, 
+					function(result){
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+			
+			$scope.oltSelectedEvent = function (_oltId) {
+				oltId = _oltId;
+				refresh();
+			};
 		} ]);
 
 haControllers.controller('PolicyCtrl', [
