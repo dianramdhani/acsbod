@@ -50,13 +50,13 @@ haServices
 									return createResource($resource,
 											"/onu/changestate", "POST", false);
 								},
-								illegalonu : function() {
+								illegalonu : function(oltId) {
 									return createResource($resource,
-											"/onu/illegalonu", "GET", false);
+											`/onu/illegalonu/oltId/${oltId}`, "GET", false);
 								},
-								register : function() {
+								register : function(oltId) {
 									return createResource($resource,
-											"/onu/register", "POST", false);
+											`/onu/register/oltId/${oltId}`, "POST", false);
 								},
 								registeredOnu : function() {
 									return createResource($resource,
@@ -122,9 +122,9 @@ haServices
 											"/onu/deleteDbaProfile", "POST",
 											false);
 								},
-								getLineProfiles : function() {
+								getLineProfiles : function(oltId) {
 									return createResource($resource,
-											"/onu/lineProfiles", "GET", true);
+											`/onu/lineProfiles/olt/${oltId}`, "GET", true);
 								},
 								createLineProfiles : function() {
 									return createResource($resource,
@@ -143,9 +143,9 @@ haServices
 									return createResource($resource,
 											"/onu/tcont", "POST", false);
 								},
-								getServiceProfiles : function() {
+								getServiceProfiles : function(oltId) {
 									return createResource($resource,
-											"/onu/serviceProfiles", "GET", true);
+											`/onu/serviceProfiles/olt/${oltId}`, "GET", true);
 								},
 								createServiceProfiles : function() {
 									return createResource($resource,

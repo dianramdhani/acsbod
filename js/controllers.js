@@ -647,6 +647,7 @@ haControllers.controller('RegisterCtrl', [
 		function($scope, $mdDialog, $mdToast, service) {
 			checkLogin(false);
 			$scope.$emit("load", "dashboard");
+			var oltId;
 
 			function hex_to_ascii(str1) {
 				var hex = str1.split(":");
@@ -662,7 +663,7 @@ haControllers.controller('RegisterCtrl', [
 			var serviceProfiles = [];
 			var lineProfiles = [];
 			refresh = function() {
-				execute($scope, $mdDialog, true, service.illegalonu(), {},
+				execute($scope, $mdDialog, true, service.illegalonu(oltId), {},
 						function(result) {
 							result = JSON.parse(JSON.stringify(result));
 							var powers = [];
@@ -674,12 +675,12 @@ haControllers.controller('RegisterCtrl', [
 							$scope.powers = powers;
 						});
 
-				execute($scope, $mdDialog, true, service.getServiceProfiles(),
+				execute($scope, $mdDialog, true, service.getServiceProfiles(oltId),
 						{}, function(result) {
 							serviceProfiles = result;
 						});
 
-				execute($scope, $mdDialog, true, service.getLineProfiles(), {},
+				execute($scope, $mdDialog, true, service.getLineProfiles(oltId), {},
 						function(result) {
 							lineProfiles = result;
 						});
@@ -692,7 +693,7 @@ haControllers.controller('RegisterCtrl', [
 					serviceProfiles : serviceProfiles
 				};
 				newmodel.save = function() {
-					execute($scope, $mdDialog, true, service.register(), {
+					execute($scope, $mdDialog, true, service.register(oltId), {
 						sn : this.sn,
 						serviceProfileId : this.serviceProfileId,
 						lineProfileId : this.lineProfileId
@@ -706,7 +707,16 @@ haControllers.controller('RegisterCtrl', [
 						newmodel);
 			}
 
-			refresh();
+			execute($scope, $mdDialog, true, service.getOlt(), {}, 
+					function(result){
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+			
+			$scope.oltSelectedEvent = function (_oltId) {
+				oltId = _oltId;
+				refresh();
+			};
 		} ]);
 
 haControllers.controller('UnregisterCtrl', [
