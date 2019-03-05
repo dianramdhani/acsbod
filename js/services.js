@@ -66,9 +66,9 @@ haServices
 									return createResource($resource,
 											"/onu/unregister", "POST", false);
 								},
-								getPolicy : function() {
+								getPolicy : function(oltId) {
 									return createResource($resource,
-											"/onu/policy", "GET", true);
+											`/onu/policy/oltId/${oltId}`, "GET", true);
 								},
 								savePolicy : function() {
 									return createResource($resource,
@@ -82,9 +82,9 @@ haServices
 									return createResource($resource,
 											"/onu/deletePolicy", "POST", false);
 								},
-								listAssignedPolicy : function() {
+								listAssignedPolicy : function(oltId) {
 									return createResource($resource,
-											"/onu/listAssignedPolicy", "GET",
+											`/onu/listAssignedPolicy/oltId/${oltId}`, "GET",
 											true);
 								},
 								egressPolicy : function() {

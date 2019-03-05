@@ -847,25 +847,26 @@ haControllers.controller('BandwidthCtrl', [
 		function($scope, $mdDialog, $mdToast, service) {
 			checkLogin(false);
 			$scope.$emit("load", "dashboard");
+			var oltId;
 
 			refresh = function() {
-				execute($scope, $mdDialog, true, service.listAssignedPolicy(),
+				execute($scope, $mdDialog, true, service.listAssignedPolicy(oltId),
 						{}, function(result) {
 							$scope.powers = result;
 						});
 
-				execute($scope, $mdDialog, true, service.getPolicy(), {},
+				execute($scope, $mdDialog, true, service.getPolicy(oltId), {},
 						function(result) {
 							$scope.policy = result;
 						});
 			}
 
 			$scope.update = function(power) {
-				execute($scope, $mdDialog, true, service.egressPolicy(), {
+				execute($scope, $mdDialog, true, service.egressPolicy(oltId), {
 					slotOnu : power.slotOltOnuUni,
 					idPolicy : power.idEgressPolicy
 				}, function(result) {
-					execute($scope, $mdDialog, true, service.ingressPolicy(), {
+					execute($scope, $mdDialog, true, service.ingressPolicy(oltId), {
 						slotOnu : power.slotOltOnuUni,
 						idPolicy : power.idIngressPolicy
 					}, function(result) {
@@ -875,7 +876,16 @@ haControllers.controller('BandwidthCtrl', [
 				});
 			}
 
-			refresh();
+			execute($scope, $mdDialog, true, service.getOlt(), {}, 
+					function(result){
+						result = JSON.parse(JSON.stringify(result));
+						$scope.olt = result;
+					});
+			
+			$scope.oltSelectedEvent = function (_oltId) {
+				oltId = _oltId;
+				refresh();
+			};
 		} ]);
 
 haControllers.controller('ClientsCtrl', [
