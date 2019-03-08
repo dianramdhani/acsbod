@@ -676,7 +676,6 @@ haControllers
 			function refresh() {
 				refreshData().then(res => {
 					refreshView(res);
-					console.log($scope.data)
 				});
 			}
 
@@ -688,7 +687,7 @@ haControllers
 					let deviceSelected = $scope.data[index].onu;
 
 					if (startDate.isBefore(moment())) {
-						execute($scope, $mdDialog, true, service.changePolicy(), {
+						execute($scope, $mdDialog, true, service.changePolicy(deviceSelected.oltId), {
 							encriptedSn: deviceSelected.encriptedSn,
 							lineProfileId: deviceSelected.lineProfileId,
 							policyId: chosePackage.id

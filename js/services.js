@@ -119,7 +119,7 @@ haServices
 					},
 					deleteDbaProfile: function (oltId) {
 						return createResource($resource,
-							`/onu/deleteDbaProfile/oltId/${oltId}`, "POST",
+							`/onu/deleteDbaProfile/olt/${oltId}`, "POST",
 							false);
 					},
 					getLineProfiles: function (oltId) {
@@ -128,20 +128,20 @@ haServices
 					},
 					createLineProfiles: function (oltId) {
 						return createResource($resource,
-							`/onu/lineProfiles/oltId/${oltId}`, "POST", false);
+							`/onu/lineProfiles/olt/${oltId}`, "POST", false);
 					},
 					deleteLineProfiles: function (oltId) {
 						return createResource($resource,
-							`/onu/deleteLineProfile/oltId/${oltId}`, "POST",
+							`/onu/deleteLineProfile/olt/${oltId}`, "POST",
 							false);
 					},
 					createGem: function (oltId) {
 						return createResource($resource,
-							`/onu/gem/oltId/${oltId}`, "POST", false);
+							`/onu/gem/olt/${oltId}`, "POST", false);
 					},
 					createTcont: function (oltId) {
 						return createResource($resource,
-							`/onu/tcont/oltId/${oltId}`, "POST", false);
+							`/onu/tcont/olt/${oltId}`, "POST", false);
 					},
 					getServiceProfiles: function (oltId) {
 						return createResource($resource,
@@ -154,12 +154,12 @@ haServices
 					},
 					deleteServiceProfiles: function (oltId) {
 						return createResource($resource,
-							`/onu/deleteServiceProfile/oltId/${oltId}`,
+							`/onu/deleteServiceProfile/olt/${oltId}`,
 							"POST", false);
 					},
-					changePolicy: function () {
+					changePolicy: function (oltId) {
 						return createResource($resource,
-							"/onu/changePolicy", "POST", false);
+							`/onu/changePolicy/olt/${oltId}`, "POST", false);
 					},
 					updateClient: function () {
 						return createResource($resource, "/client",
