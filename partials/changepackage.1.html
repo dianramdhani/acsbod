@@ -1,0 +1,54 @@
+<md-dialog aria-label="Policy" style="max-height:85%">
+<form>
+	<md-toolbar class="md-table-toolbar md-default">
+	<div class="md-toolbar-tools">
+		<h2 class="md-title">Change Package</h2>
+	</div>
+	</md-toolbar>
+	<md-dialog-content style="width:400px;padding:24px">
+		<md-table-container>
+			<table md-table class="nobordertop">
+				<tbody md-body>
+					<tr md-row>
+						<td md-cell style="width:50%">Choose Package</td>
+						<td md-cell flex>
+							<md-select ng-model="model.packnew" placeholder="" class="">
+								<md-option ng-repeat="p in model.packs" value="{{p}}" 
+									ng-selected="$index == 0">{{p.name}}</md-option>
+							</md-select>
+						</td>
+					</tr>
+					<tr md-row>
+						<td md-cell>Start Date</td>
+						<td md-cell>
+							<md-input-container class="md-block noerror" flex>
+								<input mdc-datetime-picker  type="text" id="end" short-time="true"
+									format="DD MMMM YYYY HH:mm" name="end" ng-model="model.start" min-date="model.today">
+							</md-input-container>
+						</td>
+					</tr>
+					<tr md-row>
+						<td md-cell>Expired Date</td>
+						<td md-cell>
+							<md-input-container class="md-block noerror" flex>
+								<input mdc-datetime-picker  type="text" id="end" short-time="true"
+									format="DD MMMM YYYY HH:mm" name="end" ng-model="model.end" min-date="model.today">
+							</md-input-container>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+	</md-dialog-content>
+	<md-dialog-actions layout="row">
+		<md-button class="md-primary md-raised"  
+			ng-click="cancel()">Cancel</md-button>
+		<!-- <md-button class="md-primary md-raised"  
+			ng-click="model.update()">Apply to All Devices</md-button>
+		<md-button class="md-primary md-raised"  
+			ng-click="model.selectDevices()">Apply to Several Devices</md-button> -->
+		<md-button class="md-primary md-raised"  
+			ng-click="model.update()">Apply</md-button>
+	</md-dialog-actions>
+</form>
+</md-dialog>

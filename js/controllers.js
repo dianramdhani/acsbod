@@ -204,7 +204,7 @@ haControllers
 
 haControllers
 	.controller(
-		'DashboardCtrl',
+		'_DashboardCtrl',
 		[
 			'$scope',
 			'$mdDialog',
@@ -525,6 +525,204 @@ haControllers
 					$mdMenu.open(ev);
 				};
 			}]);
+
+haControllers
+	.controller('DashboardCtrl', [
+		'$scope',
+		'$mdDialog',
+		'$mdToast',
+		'$filter',
+		'$log',
+		'Test',
+		function ($scope, $mdDialog, $mdToast, $filter, $log, service) {
+			checkLogin(false);
+			$scope.$emit('load', 'dashboard');
+
+			// global var
+			$scope.$log = $log;
+			var assignednow;
+
+			/**
+			 * Refresh data setiap kali membuka dashboard ataupun update.
+			 */
+			function refreshData() {
+				function getOnu() {
+					return new Promise((resolve, reject) => {
+						execute($scope, $mdDialog, true, service.getOnuByCustomerId(), { customerId: localStorage.remid }, onu => {
+							resolve(onu);
+						});
+					});
+				}
+
+				function getPolicy(onu) {
+					let promises = [];
+					onu.forEach(_onu => {
+						promises.push(new Promise((resolve, reject) => {
+							execute($scope, $mdDialog, true, service.getPolicy(_onu.oltId), {}, policy => {
+								resolve(policy);
+							});
+						}));
+					});
+					return Promise.all(promises);
+				}
+
+				function getHistory() {
+					return new Promise((resolve, reject) => {
+						execute($scope, $mdDialog, true, service.history(), { id: localStorage.remid }, history => {
+							resolve({ history });
+						})
+					})
+				}
+
+				function getOnuAndPolicy() {
+					return new Promise((resolve, reject) => {
+						execute($scope, $mdDialog, true, service.getClient(), { id: localStorage.remid }, clientData => {
+							assignednow = clientData;
+							let temp = {};
+							getOnu().then(onu => {
+								temp['onu'] = onu;
+								getPolicy(onu).then(policy => {
+									temp['policy'] = policy;
+									resolve(temp);
+								});
+							});
+						});
+					});
+				}
+
+
+				return Promise.all([
+					getOnuAndPolicy(),
+					getHistory()
+				]);
+			}
+
+			/**
+			 * Update $scope.data dari data.
+			 * @param {Array} data - Data Onu, Policy, dan History
+			 */
+			function refreshView(data) {
+				let onu = data[0].onu,
+					policy = data[0].policy,
+					history = data[1].history;
+
+				let temp = [];
+				onu.forEach((_onu, i) => {
+					temp[i] = {};
+					temp[i]['onu'] = _onu;
+					temp[i]['policy'] = policy[i];
+					if (history.length != 0) {
+						temp[i]['history'] = history.find(_history => _history.id === _onu.packageChangesId);
+					} else {
+						temp[i]['history'] = undefined;
+					}
+				});
+
+				// setup view
+				temp.forEach(_temp => {
+					_temp['view'] = {
+						device: _temp.onu.snOnu,
+						region: _temp.onu.region,
+						address: _temp.onu.address
+					};
+
+					try {
+						_temp.view['subscribePackage'] = _temp.policy.find(policy => policy.id === _temp.onu.subscribedPolicyId).name
+					} catch (error) {
+						_temp.view['subscribePackage'] = undefined;
+					}
+
+					try {
+						_temp.view['ongoingPackage'] = _temp.policy.find(policy => Number(policy.id) === Number(_temp.history.changedPolicyId)).name
+					} catch (error) {
+						_temp.view['ongoingPackage'] = undefined;
+					}
+
+					try {
+						_temp.view['startDate'] = _temp.history.startDate
+					} catch (error) {
+						_temp.view['startDate'] = undefined;
+					}
+
+					try {
+						_temp.view['expiredDate'] = _temp.history.endDate
+					} catch (error) {
+						_temp.view['expiredDate'] = undefined;
+					}
+				});
+
+				$scope.data = temp;
+			}
+
+			function refresh() {
+				refreshData().then(res => {
+					refreshView(res);
+					console.log($scope.data)
+				});
+			}
+
+			$scope.update = function (event, index) {
+				function update(chosePackage, startDate, endDate) {
+					chosePackage = JSON.parse(chosePackage);
+					startDate = moment(startDate);
+					endDate = moment(endDate);
+					let deviceSelected = $scope.data[index].onu;
+
+					if (startDate.isBefore(moment())) {
+						execute($scope, $mdDialog, true, service.changePolicy(), {
+							encriptedSn: deviceSelected.encriptedSn,
+							lineProfileId: deviceSelected.lineProfileId,
+							policyId: chosePackage.id
+						}, resChangePolicy => {
+							execute($scope, $mdDialog, true, service.packageChanges(), {
+								customerId: localStorage.remid,
+								startDate: moment().valueOf(),
+								endDate: endDate.valueOf(),
+								originalPolicyId: deviceSelected.subscribedPolicyId,
+								changedPolicyId: chosePackage.id,
+								ontId: deviceSelected.id,
+								reverted: false,
+								active: true
+							}, resPackageChanges => {
+								deviceSelected.packageChangesId = resPackageChanges.id;
+								deviceSelected.ingressPolicyId = chosePackage.id;
+								deviceSelected.egressPolicyId = chosePackage.id;
+								execute($scope, $mdDialog, true, service.updateOnt(), deviceSelected, resUpdateOnt => {
+									showToast($mdToast, 'Successfully Add New BOD Schedule');
+									refresh();
+								});
+							});
+
+						});
+					} else {
+						execute($scope, $mdDialog, true, service.packageChanges(), {
+							customerId: localStorage.remid,
+							startDate: startDate.valueOf(),
+							endDate: endDate.valueOf(),
+							originalPolicyId: deviceSelected.subscribedPolicyId,
+							changedPolicyId: chosePackage.id,
+							ontId: deviceSelected.id,
+							reverted: false,
+							active: false
+						}, resPackageChanges => {
+							showToast($mdToast, 'Successfully Add New BOD Schedule');
+							refresh();
+						})
+					}
+				}
+				showPopup($mdDialog, 'partials/changepackage.html', event, true, {
+					data: $scope.data[index],
+					startDate: moment(),
+					endDate: moment().endOf('month'),
+					update: update,
+					$log: $scope.$log
+				});
+			};
+
+			// refresh data terlebih dahulu setelah semua data di update baru di refresh view
+			refresh();
+		}
+	]);
 
 haControllers.controller('TestCtrl', ['$scope', '$mdDialog',
 	function ($scope, $mdDialog) {
