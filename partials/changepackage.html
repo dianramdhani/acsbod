@@ -12,7 +12,7 @@
 						<tr md-row>
 							<td md-cell style="width:50%">Choose Package</td>
 							<td md-cell flex>
-								<md-select ng-model="chosePackage" placeholder="" class="">
+								<md-select ng-model="chosePackage" placeholder="Choose Package">
 									<md-option ng-repeat="policy in model.data.policy" value="{{policy}}">
 										{{policy.name}}
 									</md-option>
@@ -45,11 +45,8 @@
 		</md-dialog-content>
 		<md-dialog-actions layout="row">
 			<md-button class="md-primary md-raised" ng-click="cancel()">Cancel</md-button>
-			<!-- <md-button class="md-primary md-raised"  
-				ng-click="model.update()">Apply to All Devices</md-button>
-			<md-button class="md-primary md-raised"  
-				ng-click="model.selectDevices()">Apply to Several Devices</md-button> -->
-			<md-button class="md-primary md-raised" ng-click="model.update(chosePackage, model.startDate, model.endDate)">Apply</md-button>
+			<md-button class="md-primary md-raised"
+				ng-click="model.update(chosePackage, model.startDate, model.endDate)">Apply</md-button>
 		</md-dialog-actions>
 	</form>
 </md-dialog>

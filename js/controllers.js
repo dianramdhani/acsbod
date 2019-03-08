@@ -546,6 +546,14 @@ haControllers
 			 * Refresh data setiap kali membuka dashboard ataupun update.
 			 */
 			function refreshData() {
+				function getHistory() {
+					return new Promise((resolve, reject) => {
+						execute($scope, $mdDialog, true, service.history(), { id: localStorage.remid }, history => {
+							resolve({ history });
+						});
+					});
+				}
+
 				function getOnu() {
 					return new Promise((resolve, reject) => {
 						execute($scope, $mdDialog, true, service.getOnuByCustomerId(), { customerId: localStorage.remid }, onu => {
@@ -564,14 +572,6 @@ haControllers
 						}));
 					});
 					return Promise.all(promises);
-				}
-
-				function getHistory() {
-					return new Promise((resolve, reject) => {
-						execute($scope, $mdDialog, true, service.history(), { id: localStorage.remid }, history => {
-							resolve({ history });
-						})
-					})
 				}
 
 				function getOnuAndPolicy() {
@@ -652,6 +652,25 @@ haControllers
 				});
 
 				$scope.data = temp;
+
+				$scope.dataHistory = history;
+				$scope.dataHistory.forEach(dataHistory => {
+					dataHistory['data'] = $scope.data.find(data => data.onu.id === dataHistory.ontId)
+				});
+				$scope.dataHistory.forEach(dataHistory => {
+					dataHistory['view'] = {
+						device: dataHistory.data.onu.snOnu,
+						region: dataHistory.data.onu.region,
+						address: dataHistory.data.onu.address,
+						startDate: dataHistory.startDate,
+						expiredDate: dataHistory.endDate
+					};
+					try {
+						dataHistory.view['package'] = dataHistory.data.policy.find(policy => Number(policy.id) === Number(dataHistory.changedPolicyId)).name
+					} catch (error) {
+						dataHistory.view['package'] = undefined;
+					}
+				});
 			}
 
 			function refresh() {
